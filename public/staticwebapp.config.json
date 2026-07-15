@@ -1,0 +1,13 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/img/*", "/video/*", "/favicon.svg", "/*.{css,js,map,json,png,webp,svg,mp4,ico,txt}"]
+  },
+  "mimeTypes": {
+    ".webp": "image/webp",
+    ".mp4": "video/mp4"
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff"
+  }
+}
