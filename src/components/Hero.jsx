@@ -51,7 +51,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="max-w-4xl font-display text-[clamp(2.4rem,7vw,5.2rem)] leading-[1.08] font-extrabold text-white"
         >
-          {t('একমাত্র গুণগত মানসম্মত', 'The Only Quality-Assured')}{' '}
+          {t('একমাত্র গুণগত মানসম্পন্ন', 'The Only Quality-Assured')}{' '}
           <span className="text-brand" style={{ textShadow: '0 2px 24px rgba(0,0,0,.6)' }}>
             {t('পিট সাইলেজ', 'Pit Silage')}
           </span>

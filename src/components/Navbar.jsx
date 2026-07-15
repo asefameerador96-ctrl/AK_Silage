@@ -38,7 +38,7 @@ export default function Navbar() {
               {t('এ কে সাইলেজ', 'AK Silage')}
             </span>
             <span className="block text-[11px] font-medium tracking-wide text-white/70">
-              {t('গুণগত মানসম্মত পিট সাইলেজ', 'Quality-assured pit silage')}
+              {t('গুণগত মানসম্পন্ন পিট সাইলেজ', 'Quality-assured pit silage')}
             </span>
           </span>
         </a>

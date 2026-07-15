@@ -15,7 +15,7 @@ export default function WhatIs() {
     ['nutrition', t('উচ্চ পুষ্টিমান', 'High nutrition'), t('শুকনো খড়ে যে পুষ্টি নষ্ট হয়, সাইলেজে সেটা থেকে যায়', 'The nutrients lost in dry straw stay preserved in silage')],
     ['digest', t('সহজ পাচ্য', 'Easy to digest'), t('গরু সহজে হজম করতে পারে, খেতেও পছন্দ করে', 'Cattle digest it easily — and love the taste')],
     ['milk', t('দুধ উৎপাদন বৃদ্ধি', 'More milk'), t('সঠিক পুষ্টিতে দুধ ঘন হয়, ফ্যাটের পরিমাণ বাড়ে', 'Proper nutrition gives thicker milk with more fat')],
-    ['calendar', t('সারাবছর নিশ্চয়তা', 'Year-round assurance'), t('বন্যা বা খরা — যেকোনো মৌসুমে মানসম্মত খাবার', 'Flood or drought — quality feed in every season')],
+    ['calendar', t('সারাবছর নিশ্চয়তা', 'Year-round assurance'), t('বন্যা বা খরা — যেকোনো মৌসুমে মানসম্পন্ন খাবার', 'Flood or drought — quality feed in every season')],
   ]
 
   return (

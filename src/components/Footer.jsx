@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
           <p className="mt-4 max-w-xs text-[15px] leading-relaxed text-white/60">
             {t(
-              'একমাত্র গুণগত মানসম্মত পিট সাইলেজ — খামারের বারো মাসের বিশ্বস্ত পুষ্টির জোগানদার।',
+              'একমাত্র গুণগত মানসম্পন্ন পিট সাইলেজ — খামারের বারো মাসের বিশ্বস্ত পুষ্টির জোগানদার।',
               'The only quality-assured pit silage — your farm’s trusted source of nutrition, twelve months a year.'
             )}
           </p>
