@@ -1,9 +1,14 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useT } from '../i18n.jsx'
 
 export default function Hero() {
   const t = useT()
   const reduce = useReducedMotion()
+  const { scrollY } = useScroll()
+  const yBg = useTransform(scrollY, [0, 700], [0, reduce ? 0 : 170])
+  const scaleBg = useTransform(scrollY, [0, 700], [1, reduce ? 1 : 1.12])
+  const yContent = useTransform(scrollY, [0, 550], [0, reduce ? 0 : -70])
+  const fadeContent = useTransform(scrollY, [0, 500], [1, reduce ? 1 : 0.1])
 
   const stats = [
     [t('৫০ কেজি', '50 kg'), t('ফুড-গ্রেড এয়ারটাইট প্যাক', 'Food-grade airtight pack')],
@@ -13,19 +18,24 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative flex min-h-svh items-end overflow-hidden bg-ink">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src="/video/quality-silage.mp4"
-        poster="/img/hero-cover.webp"
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden="true"
-      />
+      <motion.div className="absolute inset-0" style={{ y: yBg, scale: scaleBg }}>
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/video/quality-silage.mp4"
+          poster="/img/hero-cover.webp"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/30" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-32 pb-16 sm:px-6 sm:pb-20">
+      <motion.div
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-32 pb-16 sm:px-6 sm:pb-20"
+        style={{ y: yContent, opacity: fadeContent }}
+      >
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -93,7 +103,7 @@ export default function Hero() {
             </div>
           ))}
         </motion.dl>
-      </div>
+      </motion.div>
 
       <div className="absolute bottom-5 left-1/2 z-10 hidden -translate-x-1/2 sm:block" aria-hidden="true">
         <svg className="animate-bounce-soft h-7 w-7 text-white/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
