@@ -54,13 +54,7 @@ export default function Footer() {
             <br />
             {t('এ.কে. হেরিটেজ এন্ড কর্পোরেশন', 'A.K. Heritage & Corporation')}
             <br />
-            {t('পলাশবাড়ী, রংপুর', 'Palashbari, Rangpur')}
-          </p>
-          <p className="mt-4 text-[15px] text-white/60">
-            {t('আমাদের আরেকটি ব্র্যান্ড —', 'Also from our family —')}{' '}
-            <a href="https://www.prantorsilage.com" className="font-semibold text-white/85 underline-offset-4 hover:text-white hover:underline">
-              {t('প্রান্তর সাইলেজ', 'Prantor Silage')}
-            </a>
+            {t('পাগলাপীর, রংপুর', 'Paglapir, Rangpur')}
           </p>
         </div>
       </div>
