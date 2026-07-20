@@ -35,7 +35,7 @@ export default function Testimonial() {
             </p>
           </blockquote>
           <p className="mt-6 font-display text-lg font-bold">
-            {t('করিম মিয়া', 'Karim Mia')}
+            {t('মোঃ রফিকুল ইসলাম', 'Md. Rafiqul Islam')}
             <span className="ml-2 font-body text-sm font-medium text-white/60">
               {t('দুগ্ধ খামারি, পিরোজপুর', 'Dairy farmer, Pirojpur')}
             </span>
