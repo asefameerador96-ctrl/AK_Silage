@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useT } from '../i18n.jsx'
 
@@ -10,6 +11,26 @@ export default function Hero() {
   const yContent = useTransform(scrollY, [0, 550], [0, reduce ? 0 : -70])
   const fadeContent = useTransform(scrollY, [0, 500], [1, reduce ? 1 : 0.1])
 
+  // The hero video is decorative and 2.7 MB. With autoPlay the browser fetches it
+  // before the hero settles, which put largest-contentful-paint around 5s — the
+  // worst of any of our sites. The poster image renders the hero correctly on its
+  // own, so attach the source only once the page is idle, and skip it altogether
+  // for reduced-motion users and on metered or slow connections.
+  const [videoSrc, setVideoSrc] = useState(null)
+  useEffect(() => {
+    if (reduce) return
+    const conn = navigator.connection
+    if (conn?.saveData || /(^|-)2g$/.test(conn?.effectiveType || '')) return
+
+    const attach = () => setVideoSrc('/video/quality-silage.mp4')
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(attach, { timeout: 3000 })
+      return () => cancelIdleCallback(id)
+    }
+    const id = setTimeout(attach, 1500)
+    return () => clearTimeout(id)
+  }, [reduce])
+
   const stats = [
     [t('৫০ কেজি', '50 kg'), t('ফুড-গ্রেড এয়ারটাইট প্যাক', 'Food-grade airtight pack')],
     [t('৬৫–৭৫%', '65–75%'), t('TDN — মোট হজমযোগ্য পুষ্টি', 'TDN — total digestible nutrients')],
@@ -21,8 +42,9 @@ export default function Hero() {
       <motion.div className="absolute inset-0" style={{ y: yBg, scale: scaleBg }}>
         <video
           className="absolute inset-0 h-full w-full object-cover"
-          src="/video/quality-silage.mp4"
+          src={videoSrc ?? undefined}
           poster="/img/hero-cover.webp"
+          preload="none"
           autoPlay
           muted
           loop
