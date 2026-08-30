@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useLang, useT } from '../i18n.jsx'
 
 export default function Navbar() {
@@ -6,6 +7,13 @@ export default function Navbar() {
   const { lang, toggle } = useLang()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { pathname } = useLocation()
+  const onHome = pathname === '/'
+
+  // Section links are in-page anchors on the homepage, but from a guide page they
+  // have to navigate home first — "#product" alone would just append a fragment to
+  // the guide's own URL and go nowhere.
+  const section = (hash) => (onHome ? hash : `/${hash}`)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -15,11 +23,11 @@ export default function Navbar() {
   }, [])
 
   const links = [
-    [t('সাইলেজ কী', 'What is Silage'), '#silage'],
-    [t('পণ্য', 'Product'), '#product'],
-    [t('উপকারিতা', 'Benefits'), '#benefits'],
-    [t('গ্যালারি', 'Gallery'), '#gallery'],
-    [t('যোগাযোগ', 'Contact'), '#contact'],
+    [t('সাইলেজ কী', 'What is Silage'), section('#silage')],
+    [t('পণ্য', 'Product'), section('#product')],
+    [t('উপকারিতা', 'Benefits'), section('#benefits')],
+    [t('খামারির গাইড', 'Guide'), '/guide', true],
+    [t('যোগাযোগ', 'Contact'), section('#contact')],
   ]
 
   return (
@@ -29,7 +37,7 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="flex items-center gap-2.5" aria-label="AK Silage">
+        <Link to="/" className="flex items-center gap-2.5" aria-label="AK Silage">
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand font-display text-xl font-extrabold text-white">
             AK
           </span>
@@ -41,18 +49,28 @@ export default function Navbar() {
               {t('গুণগত মানসম্পন্ন পিট সাইলেজ', 'Quality-assured pit silage')}
             </span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
-          {links.map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              className="text-sm font-semibold text-white/85 transition-colors duration-200 hover:text-white"
-            >
-              {label}
-            </a>
-          ))}
+          {links.map(([label, href, isRoute]) =>
+            isRoute ? (
+              <Link
+                key={href}
+                to={href}
+                className="text-sm font-semibold text-white/85 transition-colors duration-200 hover:text-white"
+              >
+                {label}
+              </Link>
+            ) : (
+              <a
+                key={href}
+                href={href}
+                className="text-sm font-semibold text-white/85 transition-colors duration-200 hover:text-white"
+              >
+                {label}
+              </a>
+            )
+          )}
         </div>
 
         <div className="flex items-center gap-2.5">
@@ -91,16 +109,27 @@ export default function Navbar() {
 
       {open && (
         <div className="border-t border-white/10 bg-ink/95 px-6 py-4 lg:hidden">
-          {links.map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="block py-2.5 text-base font-semibold text-white/85 hover:text-white"
-            >
-              {label}
-            </a>
-          ))}
+          {links.map(([label, href, isRoute]) =>
+            isRoute ? (
+              <Link
+                key={href}
+                to={href}
+                onClick={() => setOpen(false)}
+                className="block py-2.5 text-base font-semibold text-white/85 hover:text-white"
+              >
+                {label}
+              </Link>
+            ) : (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="block py-2.5 text-base font-semibold text-white/85 hover:text-white"
+              >
+                {label}
+              </a>
+            )
+          )}
           <a
             href="tel:+8801901244248"
             className="mt-3 block rounded-full bg-brand px-5 py-3 text-center text-sm font-bold text-white"
